@@ -33,10 +33,10 @@ const Register = () => {
         <div
             className="m-auto mt-28 max-w-xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" action="src/components#">
-                <h5 className="text-xl font-medium text-gray-900 dark:text-white">Create an account</h5>
+                <h5 className="text-xl font-medium text-gray-900 dark:text-white">Створити аккаунт</h5>
                 <div className="flex justify-between">
                     <div>
-                        <label htmlFor="text" className="block w-60 mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                        <label htmlFor="text" className="block w-60 mb-2 text-sm font-medium text-gray-900 dark:text-white">Ім'я</label>
                         <input
                             type="text"
                             name="name"
@@ -47,7 +47,7 @@ const Register = () => {
                             required/>
                     </div>
                     <div>
-                        <label htmlFor="text" className="block w-60 mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                        <label htmlFor="text" className="block w-60 mb-2 text-sm font-medium text-gray-900 dark:text-white">Прізвище</label>
                         <input
                             type="text"
                             name="surname"
@@ -59,8 +59,7 @@ const Register = () => {
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        email</label>
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваша пошта</label>
                     <input
                         type="email"
                         name="email"
@@ -71,8 +70,7 @@ const Register = () => {
                         required/>
                 </div>
                 <div>
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        password</label>
+                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Пароль</label>
                     <input
                         type="password"
                         name="password"
@@ -102,12 +100,12 @@ const Register = () => {
                 {/*</div>*/}
                 <button type="submit"
                         className="w-40 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Create account
+                    Створити аккаунт
                 </button>
                 <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Already have an account?
+                    Вже є аккаунт?
                     <Link to='/signin' className="text-blue-700 hover:underline dark:text-blue-500">
-                        Login here.
+                        Авторизуйтесь тут.
                     </Link>
                 </div>
             </form>
