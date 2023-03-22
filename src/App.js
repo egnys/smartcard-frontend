@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route, Routes} from "react-router-dom";
+import SignIn from "./components/Authentication/SignIn";
+import Main from "./components/Main";
+import Register from "./components/Authentication/Register";
+import ResetPass from "./components/Authentication/ResetPass";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAuthMe, selectorIsAuth} from "./redux/slices/auth";
+import {useEffect} from "react";
+import Navbar from "./components/Navbar";
+import Dictionary from "./components/Cards/Dictionary";
+import Exercises from "./components/Practice/Exercises";
+import Newfive from "./components/Practice/Newfive";
 
 function App() {
+    const dispatch = useDispatch()
+    const isAuth = useSelector(selectorIsAuth)
+    useEffect(() => {
+        dispatch(fetchAuthMe())
+    },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+          <Navbar/>
+          <Routes>
+              <Route path='/' element={<Main/>}/>
+              <Route path='/dictionary' element={<Dictionary/>}/>
+              <Route path='/signin' element={<SignIn/>}/>
+              <Route path='/register' element={<Register/>}/>
+              <Route path='/lostpassword' element={<ResetPass/>}/>
+              <Route path='/practice' element={<Exercises/>}/>
+              <Route path='/newfive' element={<Newfive/>}/>
+          </Routes>
+      </div>
   );
 }
 
