@@ -2,14 +2,14 @@ import React from 'react';
 import {useDispatch} from "react-redux";
 import {fetchDeleteCard} from "../../redux/slices/cards";
 import listen from '../../img/volume-up.png'
-import {useSpeechSynthesis} from "react-speech-kit";
+// import {useSpeechSynthesis} from "react-speech-kit";
 import './CardItem.css'
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 
 const CardItem = ({keyId, word, translation, editWord, setWord, setTranslation, setId, learningRate}) => {
     const dispatch = useDispatch()
-    const {speak} = useSpeechSynthesis()
+    // const {speak} = useSpeechSynthesis()
     const deleteWord = async (key) => {
         if (window.confirm('Ви дійсно хочете видалил слово?')){
             dispatch(fetchDeleteCard(key))
@@ -23,7 +23,7 @@ const CardItem = ({keyId, word, translation, editWord, setWord, setTranslation, 
         editWord(keyId)
     }
     const listenTo = () => {
-        speak({text:word})
+        // speak({text:word})
     }
         return (
             <>
