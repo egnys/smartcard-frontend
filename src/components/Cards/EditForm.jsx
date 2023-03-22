@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import close from "../../img/close.png";
 import axios from "../../axios";
-import {use} from "bcrypt/promises";
+// import {use} from "bcrypt/promises";
 
 const EditForm = ({edit, setEdit, updateInfo, id, word, translation}) => {
     const handleClick = () =>{
