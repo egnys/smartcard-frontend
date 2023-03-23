@@ -32,7 +32,8 @@ const Dictionary = () => {
     return (
         <div>
             {/*<Navbar/>*/}
-            {myId === 0 ? <CardContainer myCards={myCards} updateInfo={updateInfo}/> : <Navigate to='/signin'/>}
+            <CardContainer myCards={myCards} updateInfo={updateInfo}/>
+            {myId !== 0 ? true : <Navigate to='/signin'/>}
         </div>
     );
 };
