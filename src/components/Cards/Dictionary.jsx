@@ -26,14 +26,11 @@ const Dictionary = () => {
         dispatch(fetchCards())
     }, [])
 
-    const isAuth = useSelector(selectorIsAuth)
-    if (!token & !isAuth){
-        return <Navigate to='/signin'/>
-    }
     return (
         <div>
             {/*<Navbar/>*/}
-            <CardContainer myCards={myCards} updateInfo={updateInfo}/>
+            {myCards.length > 0 ? <CardContainer myCards={myCards} updateInfo={updateInfo}/> : <Navigate to='/signin'/>}
+
         </div>
     );
 };
