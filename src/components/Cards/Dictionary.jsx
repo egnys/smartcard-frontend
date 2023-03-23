@@ -12,9 +12,9 @@ const Dictionary = () => {
     const cards = useSelector(state => state.cards)
 
     const token = window.localStorage.getItem('token')
-    const decoded = jwt_decode(token, "ecqwe21e1")
-    const myId = decoded._id
-    const myCards = cards.cards.items.filter(card => card.user._id === myId)
+    const decoded = token ? jwt_decode(token, "ecqwe21e1") : 0
+    const myId = decoded ? decoded._id : 0
+    const myCards = myId ? cards.cards.items.filter(card => card.user._id === myId) : []
 
     const updateInfo = () => {
         dispatch(fetchCards())
