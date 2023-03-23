@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCards} from "../../redux/slices/cards";
 import CardContainer from "./CardContainer";
 import jwt_decode from "jwt-decode";
+import {selectorIsAuth} from "../../redux/slices/auth";
+import {Navigate} from "react-router-dom";
 
 
 const Dictionary = () => {
@@ -17,11 +19,17 @@ const Dictionary = () => {
     const updateInfo = () => {
         dispatch(fetchCards())
     }
+
+
     // const isCardsLoading = cards.status === 'loading'
     React.useEffect(() => {
         dispatch(fetchCards())
     }, [])
 
+    const isAuth = useSelector(selectorIsAuth)
+    if (!token & !isAuth){
+        return <Navigate to='/signin'/>
+    }
     return (
         <div>
             {/*<Navbar/>*/}

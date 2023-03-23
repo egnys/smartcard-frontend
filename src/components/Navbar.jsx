@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout, selectorIsAuth} from "../redux/slices/auth";
 import icon from '../../src/img/dictionary.png'
@@ -12,6 +12,7 @@ const Navbar = () => {
             window.localStorage.removeItem('token')
         }
     }
+
     return (
         <div>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
