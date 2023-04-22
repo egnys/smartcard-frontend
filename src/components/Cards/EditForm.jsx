@@ -7,9 +7,9 @@ const EditForm = ({edit, setEdit, updateInfo, id, word, translation}) => {
     const handleClick = () =>{
         setEdit(false)
     }
+
     const [wordCard, setWord] = useState(word)
     const [translationCard, setTranslate] = useState(translation)
-
     const onSubmit = async (event) =>{
         event.preventDefault();
         try {
@@ -21,6 +21,7 @@ const EditForm = ({edit, setEdit, updateInfo, id, word, translation}) => {
             console.warn(err)
         }
     }
+
     return (
         <div
             className="m-auto mt-28 max-w-sm p-4 bg-white select-none relative border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">

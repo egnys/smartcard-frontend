@@ -10,8 +10,8 @@ import {useEffect} from "react";
 import Navbar from "./components/Navbar";
 import Dictionary from "./components/Cards/Dictionary";
 import Exercises from "./components/Practice/Exercises";
-import Newfive from "./components/Practice/Newfive";
-
+import FirstStep from './components/Practice/firstStep';
+import SecondStep from './components/Practice/SecondStep';
 function App() {
     const dispatch = useDispatch()
     const isAuth = useSelector(selectorIsAuth)
@@ -28,7 +28,8 @@ function App() {
               <Route path='/register' element={<Register/>}/>
               <Route path='/lostpassword' element={<ResetPass/>}/>
               <Route path='/practice' element={<Exercises/>}/>
-              <Route path='/newfive' element={<Newfive/>}/>
+              <Route path='/first-step' element={<FirstStep/>}/>
+              <Route path='/second-step' element={<SecondStep/>}/>
           </Routes>
       </div>
   );

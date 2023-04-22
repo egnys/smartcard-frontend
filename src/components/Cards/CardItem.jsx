@@ -4,8 +4,9 @@ import {fetchDeleteCard} from "../../redux/slices/cards";
 import listen from '../../img/volume-up.png'
 import {useSpeechSynthesis} from "react-speech-kit";
 import './CardItem.css'
-import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
+import axios from "../../axios";
+
 
 const CardItem = ({keyId, word, translation, editWord, setWord, setTranslation, setId, learningRate}) => {
     const dispatch = useDispatch()

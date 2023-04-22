@@ -37,7 +37,7 @@ const SignIn = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className="space-y-6"
                 action="src/components#">
-                <h5 className="text-xl font-medium text-gray-900 dark:text-white">Створи аккаунт SmartCard</h5>
+                <h5 className="text-xl font-medium text-gray-900 dark:text-white">Увійти в аккаунт SmartCard</h5>
                 <div>
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваша пошта</label>
                     <input type="email" name="email" id="email"

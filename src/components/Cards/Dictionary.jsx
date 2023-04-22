@@ -5,7 +5,7 @@ import CardContainer from "./CardContainer";
 import jwt_decode from "jwt-decode";
 import {selectorIsAuth} from "../../redux/slices/auth";
 import {Navigate} from "react-router-dom";
-
+import { TailSpin } from 'react-loader-spinner'
 
 const Dictionary = () => {
     const dispatch = useDispatch()
@@ -14,22 +14,31 @@ const Dictionary = () => {
     const token = window.localStorage.getItem('token')
     const decoded = token ? jwt_decode(token, "ecqwe21e1") : 0
     const myId = decoded ? decoded._id : 0
-    const myCards = myId ? cards.cards.items.filter(card => card.user._id === myId) : []
 
     const updateInfo = () => {
-        dispatch(fetchCards())
+        dispatch(fetchCards(myId))
     }
 
-
-    // const isCardsLoading = cards.status === 'loading'
     React.useEffect(() => {
-        dispatch(fetchCards())
+        dispatch(fetchCards(myId))
     }, [])
-
     return (
         <div>
-            {/*<Navbar/>*/}
-            <CardContainer myCards={myCards} updateInfo={updateInfo}/>
+            {cards.cards.status === 'loaded' 
+            ? 
+            <CardContainer myCards={cards.cards.items} updateInfo={updateInfo}/> 
+            : 
+            <div className='flex justify-center mt-28'>
+                <TailSpin
+                height="60"
+                width="60"
+                color="#51E5FF"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                visible={true}
+            />
+            </div>
+            }
             {myId !== 0 ? true : <Navigate to='/signin'/>}
         </div>
     );

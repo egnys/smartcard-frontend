@@ -2,17 +2,22 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export  const fetchCards = createAsyncThunk('cards/fetchCards',
-    async () =>{
-        const {data} = await axios.get('/cards')
+    async (id) =>{
+        const {data} = await axios.get(`/cards/${id}`)
         return data
     })
+
 export  const fetchDeleteCard = createAsyncThunk('cards/fetchDeleteCard',
-    async (id) => await axios.delete(`/cards/${id}`))
+    async (id) => {
+        await axios.delete(`/cards/${id}`)
+    })
+
 export  const fetchEditCards = createAsyncThunk('cards/fetchEditCards',
     async (id) =>{
         const {data} = await axios.patch(`/cards/${id}`)
         return data
     })
+
 const initialState = {
     cards: {
         items: [],
