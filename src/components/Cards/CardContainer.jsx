@@ -25,10 +25,10 @@ const CardContainer = ({myCards , updateInfo}) => {
                               word={word}
                               translation={translation}
             /> : false}
-            <div className="w-3/5 max-md:w-5/6 max-lg:w-full m-auto relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <div className="w-3/5 max-md:w-5/6 max-lg:w-full max-xl:w-full m-auto relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-white table-auto">
                     <caption
-                        className="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                        className="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-navbar">
                         <button
                             onClick={addNewWord}
                             className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">

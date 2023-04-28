@@ -12,6 +12,8 @@ import Dictionary from "./components/Cards/Dictionary";
 import Exercises from "./components/Practice/Exercises";
 import FirstStep from './components/Practice/firstStep';
 import SecondStep from './components/Practice/SecondStep';
+import ThirdStep from './components/Practice/ThirdStep';
+import FourthStep from './components/Practice/FourthStep';
 function App() {
     const dispatch = useDispatch()
     const isAuth = useSelector(selectorIsAuth)
@@ -19,7 +21,7 @@ function App() {
         dispatch(fetchAuthMe())
     },[])
   return (
-      <div>
+      <div className='dark:bg-div min-h-screen'>
           <Navbar/>
           <Routes>
               <Route path='/' element={<Main/>}/>
@@ -30,6 +32,8 @@ function App() {
               <Route path='/practice' element={<Exercises/>}/>
               <Route path='/first-step' element={<FirstStep/>}/>
               <Route path='/second-step' element={<SecondStep/>}/>
+              <Route path='/third-step' element={<ThirdStep/>}/>
+              <Route path='/fourth-step' element={<FourthStep/>}/>
           </Routes>
       </div>
   );

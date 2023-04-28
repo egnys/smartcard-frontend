@@ -12,7 +12,7 @@ const CardItem = ({keyId, word, translation, editWord, setWord, setTranslation, 
     const dispatch = useDispatch()
     const {speak} = useSpeechSynthesis()
     const deleteWord = async (key) => {
-        if (window.confirm('Ви дійсно хочете видалил слово?')){
+        if (window.confirm('Ви дійсно хочете видалити слово?')){
             dispatch(fetchDeleteCard(key))
         }
     }
@@ -28,7 +28,7 @@ const CardItem = ({keyId, word, translation, editWord, setWord, setTranslation, 
     }
         return (
             <>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr className="bg-white border-b dark:bg-navbar dark:border-gray-700">
                     <th scope="row" className="px-6 py-4 font-medium text-lg text-gray-900 whitespace-nowrap dark:text-white">
                         {word}
                     </th>

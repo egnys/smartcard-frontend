@@ -3,11 +3,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCards} from "../../redux/slices/cards";
 import jwt_decode from "jwt-decode";
 import {v4} from 'uuid'
+import listen from '../../img/volume-up.png'
 import axios from "../../axios";
+import {useSpeechSynthesis} from "react-speech-kit";
 
-const SecondStep = () => {
+
+const ThirdStep = () => {
     const dispatch = useDispatch()
     const cards = useSelector(state => state.cards.cards.items)
+
+    const {speak} = useSpeechSynthesis()
 
     const token = window.localStorage.getItem('token')
     const decoded = token ? jwt_decode(token, "ecqwe21e1") : 0
@@ -16,43 +21,20 @@ const SecondStep = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [end, setEnd] = useState(false)
     const [learnedWords, setLearnedWords] = useState([])
-    const quiz = [...cards].sort((a,b) => a.learningRate - b.learningRate).slice(0,5).map(card => {
+    const quiz = [...cards].sort((a,b) => a.learningRate - b.learningRate).slice(0,5).map(card =>{
         return {
             questionWord: card.word,
-            answerOptions: shuffle([...cards].sort((a,b) => a.learningRate - b.learningRate).slice(0,5).map(el => {
-                return {
-                    id: el._id,
-                    questionWord_id: card._id,
-                    questionWord_lr: card.learningRate,
-                    learningRate: el.learningRate,
-                    answerWord: el.translation,
-                    originalWord: card.word,
-                    isCorrect: card._id === el._id ? true: false,
-                }
-            }))
+            answerOption:[{
+                questionWord: card.word,
+                questionWord_id: card._id,
+                questionWord_lr: card.learningRate,
+            }]
         }
     })
-    function shuffle(array){
-        let currentIndex = array.length,  randomIndex;
-
-        // While there remain elements to shuffle.
-        while (currentIndex !== 0) {
-      
-          // Pick a remaining element.
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-      
-        return array;
-    }
     const addLearningRate = async(ansop) => {
         try {
-            const fields = {learningRate: ansop.learningRate + 2}
-            await axios.patch(`/card/${ansop.id}`, fields)
+            const fields = {learningRate: ansop.questionWord_lr + 2}
+            await axios.patch(`/card/${ansop.questionWord_id}`, fields)
         } catch (err){
             console.warn(err)
         }
@@ -66,12 +48,17 @@ const SecondStep = () => {
         }
     }
     const handleAnswerOptionClick = (ansop) =>{
-        if (ansop.isCorrect){
+        let answer = document.getElementById('inp_answ').value
+        if (ansop.questionWord === answer){
             addLearningRate(ansop)
-            setLearnedWords([...learnedWords, [ansop.originalWord, <span className='text-green-400'>+2%</span>]])
+            setLearnedWords([...learnedWords, [ansop.questionWord, <span className='text-green-400'>+2%</span>]])
+            if (answer !== ''){
+                document.getElementById('inp_answ').value = ''
+            }
         } else{
             delLearningRate(ansop)
-            setLearnedWords([...learnedWords, [ansop.originalWord, ansop.learningRate === 0 ? '0%' : <span className='text-red-400'>-1%</span>]])
+            setLearnedWords([...learnedWords, [ansop.questionWord, ansop.questionWord_lr === 0 ? '0%' : <span className='text-red-400'>-1%</span>]])
+            document.getElementById('inp_answ').value = ''
         }
         const nextQuestion = currentQuestion + 1
         if (nextQuestion < quiz.length){
@@ -79,6 +66,10 @@ const SecondStep = () => {
         } else {
             setEnd(true)
         }
+
+    }
+    const listenTo = (word) => {
+        speak({text: word})
     }
     React.useEffect(() => {
         dispatch(fetchCards(myId))
@@ -113,28 +104,35 @@ const SecondStep = () => {
                                 {currentQuestion + 1} / {quiz.length}
                             </h5>
                             <h5 className="mb-2 text-2xl max-md:text-xl tracking-tight text-gray-900 dark:text-white">
-                                Обери правильний переклад:
+                                Правильно написати слово:
                             </h5>
                         </div>
-                        <hr className="w-full h-px my-5 bg-gray-200 border-0 dark:bg-white-700"></hr>
-                        <div className='flex justify-between max-lg:flex-col'>
-                            <div className='flex flex-col items-center'>
-                                <h3 className='mt-9 max-lg:mt-0 max-lg:mb-4 text-xl dark:text-white'>Як перекласти слово <span className='font-bold'>{quiz[currentQuestion].questionWord}</span>?</h3>
-                            </div>
-                            <div className='flex flex-col'>
-                                {quiz.length > 0 ? quiz[currentQuestion].answerOptions.map( ansop => (
-                                    <button key={v4()} type="button" id={ansop.id}
+                        <hr className="w-full h-px my-5 bg-gray-200 border-0 dark:bg-white"></hr>
+                        {quiz.length > 0 ? quiz[currentQuestion].answerOption.map(ansop => (
+                            <div className='flex flex-col items-center' key={v4()}>
+                                <div className=''>
+                                        <h3 className='mt-9 mb-5 text-xl flex items-center dark:text-white'>
+                                        Прослухати слово
+                                        <button className='ml-2' onClick={() => listenTo(ansop.questionWord)}>
+                                            <img className='w-8' src={listen} alt="Listen"/>
+                                        </button>:
+                                    </h3>
+                                </div>
+                                <div className=''>
+                                    <input className='border text-3xl text-center' type="text" name="" id="inp_answ"/>
+                                </div>
+                                <button type="button" id={ansop.questionWord_id}
                                     onClick={() => handleAnswerOptionClick(ansop)}
-                                        className="py-2.5 px-5 mr-2 mb-2 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-white-800 dark:text-white-400 dark:border-gray-600 dark:hover:text-blue-700">
-                                            {ansop.answerWord}
-                                    </button>
-                                )): ''}
+                                    className="py-2.5 px-5 mr-2 mb-2 mt-5 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-white dark:text-black dark:border-gray-600 dark:hover:text-blue-700">
+                                        Далі
+                                </button>
                             </div>
-                        </div>
+                        )): ''}
+                        
                     </div>}
             </div> : ''}
         </div>
     );
 };
 
-export default SecondStep;
+export default ThirdStep;

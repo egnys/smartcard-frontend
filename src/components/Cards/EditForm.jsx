@@ -24,7 +24,7 @@ const EditForm = ({edit, setEdit, updateInfo, id, word, translation}) => {
 
     return (
         <div
-            className="m-auto mt-28 max-w-sm p-4 bg-white select-none relative border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            className="m-auto mt-28 max-w-sm p-4 bg-white select-none relative border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-navbar dark:border-white">
             <button onClick={handleClick}>
                 <img
                     className='w-8 cursor-pointer absolute top-2 right-3'
