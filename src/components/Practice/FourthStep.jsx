@@ -120,7 +120,7 @@ const FourthStep = () => {
                                     </h3>
                                 </div>
                                 <div className=''>
-                                    <input className='border text-3xl text-center' type="text" name="" id="inp_answ"/>
+                                    <input className='border text-3xl text-center max-sm:text-xl' type="text" name="" id="inp_answ"/>
                                 </div>
                                 <button type="button" id={ansop.questionWord_id}
                                     onClick={() => handleAnswerOptionClick(ansop)}
