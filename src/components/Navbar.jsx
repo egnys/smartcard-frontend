@@ -29,7 +29,7 @@ const Navbar = () => {
         el.classList.contains('hidden') ? el.classList.remove('hidden') : el.classList.add('hidden')
       }
     return (
-        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded sticky top-0 dark:bg-navbar">
+        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded sticky z-10 top-0 dark:bg-navbar">
             <div className='flex justify-between md:hidden'>
                 <Link to="/" className="flex items-center">
                             <img src={icon} className="h-10 mr-3 sm:h-10"

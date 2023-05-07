@@ -3,7 +3,6 @@ import {useDispatch} from "react-redux";
 import {fetchDeleteCard} from "../../redux/slices/cards";
 import listen from '../../img/volume-up.png'
 import {useSpeechSynthesis} from "react-speech-kit";
-import './CardItem.css'
 import 'react-circular-progressbar/dist/styles.css';
 import axios from "../../axios";
 
